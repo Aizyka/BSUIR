@@ -30,62 +30,62 @@ int main()
     }
     getchar();
     fflush(stdin);
-    getchar(); //Ожидание нажатия ENTER для закрытия программы
+    getchar(); //Waiting for pressing ENTER to close program
 }
 
 void Task1() {
     float height, radius;
     printf_s("Write height and radius\n"); 
-    if (scanf_s("%f%f", &height, &radius) != 2) { //получаем данные о высоте и радиусе и записываем эти данные в переменную
+    if (scanf_s("%f%f", &height, &radius) != 2) { //Getting height and radius values 
         printf_s("Invalid inputs\n");
         return;
     }
-    float Sside = 2 * PI * radius * height; //вычисляем площадь боковой поверхности
-    float Sfull = 2 * PI * radius * (radius + height); //вычисляем площадь полной поверхности
-    float V = PI * radius * radius * height; //вычисляем объём
-    printf_s("S side: %.2f\nS full: %.2f\nV: %.2f\n", Sside, Sfull, V); //выводим данные о проделанных операциях
+    float Sside = 2 * PI * radius * height; //Calculating side S
+    float Sfull = 2 * PI * radius * (radius + height); //Calculating full S
+    float V = PI * radius * radius * height; //Calculating V
+    printf_s("S side: %.2f\nS full: %.2f\nV: %.2f\n", Sside, Sfull, V); //Showing result
 }
 
 void Task2() {
     float m,n,p;
     printf_s("Write m,n,p\n");
-    if (scanf_s("%f%f%f", &m,&n,&p) != 3) { //получаем числа и записываем их в переменные
+    if (scanf_s("%f%f%f", &m,&n,&p) != 3) { //Getting m,n,p values
         printf_s("Invalid inputs\n");
         return;
     }
-    int count = 0; //переменная count отвечает за количество отрицательных чисел
+    int count = 0; //Variable count corresponds for "count negative values"
     if (m < 0) count++;
     if (n < 0) count++;
     if (p < 0) count++;
-    printf_s("Negative values: %d\n", count); //выводим количество отрицательных чисел
+    printf_s("Negative values: %d\n", count); //Showing result
 }
 
 void Task3() {
     int x1,x2,x3,a,y1,y2,y3,b;
     printf_s("Write coords of first point\n");
-    if (scanf_s("%d%d", &x1, &y1) != 2) { //получаем координаты x1,y1 и записываем в эти же переменные
+    if (scanf_s("%d%d", &x1, &y1) != 2) { //Getting x1,y1 values
         printf_s("Invalid inputs\n");
         return;
     }
 
     printf_s("Write coords of second point\n");
-    if (scanf_s("%d%d", &x2, &y2) != 2) { //получаем координаты x2,y2 и записываем в эти же переменные
+    if (scanf_s("%d%d", &x2, &y2) != 2) { //Getting x2,y2 values
         printf_s("Invalid inputs\n");
         return;
     }
 
     printf_s("Write coords of third point\n");
-    if (scanf_s("%d%d", &x3, &y3) != 2) { //получаем координаты x3,y3 и записываем в эти же переменные
+    if (scanf_s("%d%d", &x3, &y3) != 2) { //Getting x3,y3 values
         printf_s("Invalid inputs\n");
         return;
     }
 
     printf_s("Write coords of M point\n");
-    if (scanf_s("%d%d", &a, &b) != 2) { //получаем координаты a,b и записываем в эти же переменные
+    if (scanf_s("%d%d", &a, &b) != 2) { //Getting a,b values
         printf_s("Invalid inputs\n");
         return;
     }
-    //Здесь проверяем, находится ли точка M в треугольнике
+    //Check if point M placed in triangle
     if ((a - x1) * (y1 - y2) - (b - y1) * (x1 - x2) >= 0 && (a - x2) * (y2 - y3) - (b - y2) * (x2 - x3) >= 0 && (a - x3) * (y3 - y1) - (b - y3) * (x3 - x1) >= 0) {
         printf_s("Yes\n");
     }
@@ -97,13 +97,13 @@ void Task3() {
 void Task4() {
     int age;
     printf_s("Write age\n");
-    if (!scanf_s("%d", &age) || age < 1 || age > 9) { //получаем данные о возрасте, записываем в переменную age, проверяем промежуток 9>age>1
+    if (!scanf_s("%d", &age) || age < 1 || age > 9) { //Getting age value and check if age 9 > age > 1
         printf_s("Invalid inputs\n");
         return;
     }
-    setlocale(LC_ALL, "Russian"); //включаем поддержку русского языка для корректного вывода программы
-    printf_s("Мне %d ", age); //выводим начальные данные
-    switch (age) { //выводим дополнительное слово, смотря на данные переменной age
+    setlocale(LC_ALL, "Russian"); //Enabling Russian support
+    printf_s("Мне %d ", age); //Showing first part of sentence
+    switch (age) { //Showing second part of sentence based on variable age
     case 1:
         printf_s("год\n");
         break;
