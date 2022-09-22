@@ -72,7 +72,7 @@ void Task3() {
         return;
     }
     printf_s("Write N\n");
-    if (!scanf_s("%d", &n) && n > 0) { //Geting N value and check if N > 0
+    if (!scanf_s("%d", &n) || n < 1) { //Geting N value and check if N > 0
         printf_s("Invalid input\n");
         scanf_s("%*s");
         Task3();
@@ -84,9 +84,9 @@ void Task3() {
         float up = x;
         float down = 1;
         float f = 2.0 * i + 1;
-        for (int i = 1; i < f; i++) { //Create loop to calculate numerator and denomerator
+        for (int d = 1; d < f; d++) { //Create loop to calculate numerator and denomerator
             up *= x;
-            down *= i + 1;
+            down *= d + 1;
         }
         if (i % 2 == 0) // (-1)^n
             numb += up / down;
