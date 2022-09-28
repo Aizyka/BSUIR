@@ -126,9 +126,9 @@ void Task2() {
 
 void Task3() {
     int n = 40;
-    int arr[100];
+    int arr[40] = { 7,6,1,8,7,5,7,8,1,8,7,5,4,5,1,5,4,9,4,0,4,7,6,5,9,4,3,7,6,8,9,1,5,4,3,5,6,7,8,0 };
     int newarr[20];
-    for (int i = 0; i < n; i++) {
+    /*for (int i = 0; i < n; i++) {
         printf_s("\nWrite value at position %d: ", i);
         int val;
         if (!scanf_s("%d", &val) || val > 9 || val < 0) {
@@ -137,15 +137,15 @@ void Task3() {
             i--;
         }
         arr[i] = val;
-    }
+    }*/
     for (int i = 0; i < 20; i++) {
         newarr[i] = 0;
     }
-    printf_s("\n");
+    printf_s("76187578187545154940 - 47659437689154356780 = ");
+    //printf_s("\n");
     for (int val_pos = 19; val_pos >= 0; val_pos--) {
         int value1 = arr[val_pos];
         int value2 = arr[20 + val_pos];
-
         newarr[val_pos] += value1 - value2;
         if (newarr[val_pos] < 0) {
             newarr[val_pos] += 10;
@@ -155,6 +155,8 @@ void Task3() {
             newarr[val_pos] -= 10;
             newarr[val_pos - 1] += 1;
         }
+    }
+    for (int val_pos = 0; val_pos < 20; val_pos++) {
         printf_s("%d", newarr[val_pos]);
     }
 }
