@@ -143,15 +143,17 @@ void Task2() {
             min_pos = i;
         }
     }
-    if (max_pos != 0) { //check if two values found and calculate sum between them
-        int sum = 0;
-        for (int i = min_pos + 1; i < max_pos; i++) {
-            sum += arr[i];
+    if (max_pos != 0) { //check if two values found and remove values between them
+        for (int i = min_pos + 1; i < n - min_pos; i++) {
+            arr[i] = arr[i - min_pos - 1 + max_pos];
         }
-        printf_s("Sum between two negative values: %d\n", sum);
+        printf_s("New array:");
+        for (int i = 0; i <= n + min_pos - max_pos; i++) {
+            printf_s(" %d", arr[i]);
+        }
     }
     else {
-        printf_s("Cant calculate sum.");
+        printf_s("Cant calculate new array.");
     }
 }
 
