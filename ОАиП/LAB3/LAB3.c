@@ -34,7 +34,7 @@ int main()
 
 void Task1() {
     int n;
-    int arr[ARR_MAX];
+    float arr[ARR_MAX];
 
     printf_s("Write n\n");
     if (!scanf_s("%d", &n) || n > 100 || n < 0) { //Getting n value and check if 100 > n > 0
@@ -54,14 +54,14 @@ void Task1() {
     int neg_1 = -1;
     int neg_2 = -1;
     for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
-        int val;
+        float val;
         if (random == 1) {
             val = 100 - (rand() % 200);
         }
         else {
             printf_s("\nWrite value at position %d: ", i);
             
-            if (!scanf_s("%d", &val)) {
+            if (!scanf_s("%f", &val)) {
                 printf_s("Invalid input\n");
                 scanf_s("%*s");
                 i--;
@@ -69,10 +69,10 @@ void Task1() {
             
         }
         arr[i] = val;
-        if (val < 0 && neg_1 < 0) neg_1 = i; //check for first negative
-        else if (val < 0 && neg_2 < 0) neg_2 = i; //check for second negative
+        if (val < 0.0 && neg_1 < 0) neg_1 = i; //check for first negative
+        else if (val < 0.0 && neg_2 < 0) neg_2 = i; //check for second negative
     }
-    int min = arr[0];
+    float min = arr[0];
     int min_pos = 0;
     for (int i = 0; i < n; i++) { //creating loop to find minimum value
         if (arr[i] < min) {
@@ -82,11 +82,11 @@ void Task1() {
     }
     printf_s("Minimum value at position: %d\n", min_pos);
     if (neg_1 >= 0 && neg_2 >= 0) { //check if two negatives found and calculate sum between them
-        int sum = 0;
+        float sum = 0;
         for (int i = neg_1 + 1; i < neg_2; i++) {
             sum += arr[i];
         }
-        printf_s("Sum between two negative values: %d\n", sum);
+        printf_s("Sum between two negative values: %f\n", sum);
     }
     else {
         printf_s("Not enough negative values to get sum.");
