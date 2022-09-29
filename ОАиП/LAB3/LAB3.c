@@ -1,4 +1,6 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #define ARR_MAX 100
 void Task1();
 void Task2();
@@ -7,6 +9,7 @@ void Task3();
 int main()
 {
     //Choose LAB task
+    srand(time(NULL));
     printf_s("Enter Task (1-3)\n");
     int task;
     if (!scanf_s("%d", &task) || task > 3 || task < 1) {
@@ -40,15 +43,30 @@ void Task1() {
         Task1();
         return;
     }
+    printf_s("Random Generation?(1 - yes, 0 - no)\n");
+    int random;
+    if (!scanf_s("%d", &random) || random > 1 || random < 0) {
+        printf_s("Invalid input\n");
+        scanf_s("%*s");
+        Task1();
+        return;
+    }
     int neg_1 = -1;
     int neg_2 = -1;
     for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
-        printf_s("\nWrite value at position %d: ",i);
         int val;
-        if (!scanf_s("%d", &val)) {
-            printf_s("Invalid input\n");
-            scanf_s("%*s");
-            i--;
+        if (random == 1) {
+            val = 100 - (rand() % 200);
+        }
+        else {
+            printf_s("\nWrite value at position %d: ", i);
+            
+            if (!scanf_s("%d", &val)) {
+                printf_s("Invalid input\n");
+                scanf_s("%*s");
+                i--;
+            }
+            
         }
         arr[i] = val;
         if (val < 0 && neg_1 < 0) neg_1 = i; //check for first negative
@@ -86,13 +104,26 @@ void Task2() {
         Task2();
         return;
     }
+    printf_s("Random Generation?(1 - yes, 0 - no)\n");
+    int random;
+    if (!scanf_s("%d", &random) || random > 1 || random < 0) {
+        printf_s("Invalid input\n");
+        scanf_s("%*s");
+        Task1();
+        return;
+    }
     for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
-        printf_s("\nWrite value at position %d: ", i);
         int val;
-        if (!scanf_s("%d", &val)) {
-            printf_s("Invalid input\n");
-            scanf_s("%*s");
-            i--;
+        if (random == 1) {
+            val = 100 - (rand() % 200);
+        }
+        else {
+            printf_s("\nWrite value at position %d: ", i);
+            if (!scanf_s("%d", &val)) {
+                printf_s("Invalid input\n");
+                scanf_s("%*s");
+                i--;
+            }
         }
         arr[i] = val;
     }
@@ -126,30 +157,42 @@ void Task2() {
 
 void Task3() {
     int n = 40;
-    int arr[ARR_MAX] = { 7,6,1,8,7,5,7,8,1,8,7,5,4,5,1,5,4,9,4,0,4,7,6,5,9,4,3,7,6,8,9,1,5,4,3,5,6,7,8,0 };
+    int arr[ARR_MAX];
     int newarr[20];
-    /*for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
-        printf_s("\nWrite value at position %d: ", i);
+    printf_s("Random Generation?(1 - yes, 0 - no)\n");
+    int random;
+    if (!scanf_s("%d", &random) || random > 1 || random < 0) {
+        printf_s("Invalid input\n");
+        scanf_s("%*s");
+        Task1();
+        return;
+    }
+    for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
+        
         int val;
-        if (!scanf_s("%d", &val) || val > 9 || val < 0) {
-            printf_s("Invalid input\n");
-            scanf_s("%*s");
-            i--;
+        if (random == 1) {
+            val = rand() % 10;
+        }
+        else {
+            printf_s("\nWrite value at position %d: ", i);
+            if (!scanf_s("%d", &val) || val > 9 || val < 0) {
+                printf_s("Invalid input\n");
+                scanf_s("%*s");
+                i--;
+            }
         }
         arr[i] = val;
-    }*/
+    }
     for (int i = 0; i < 20; i++) { //fill new array with 0 to prevent errors
         newarr[i] = 0;
     }
-    printf_s("76187578187545154940 - 47659437689154356780 = ");
-    //printf_s("\n");
+    printf_s("\n");
     for (int val_pos = 19; val_pos >= 0; val_pos--) { //Creating loop that will calculate new value
         int value1 = arr[val_pos];
         int value2 = arr[20 + val_pos];
         newarr[val_pos] += value1 - value2;
-        if (newarr[val_pos] < 0) {
+        if (newarr[val_pos] < 0 && val_pos > 0) {
             newarr[val_pos] += 10;
-            newarr[val_pos - 1] -= 1;
         }
         else if (newarr[val_pos] > 9) {
             newarr[val_pos] -= 10;
