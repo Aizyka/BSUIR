@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#define ARR_MAX 100
 void Task1();
 void Task2();
 void Task3();
@@ -31,7 +31,7 @@ int main()
 
 void Task1() {
     int n;
-    int arr[100];
+    int arr[ARR_MAX];
 
     printf_s("Write n\n");
     if (!scanf_s("%d", &n) || n > 100 || n < 0) { //Getting n value and check if 100 > n > 0
@@ -42,7 +42,7 @@ void Task1() {
     }
     int neg_1 = -1;
     int neg_2 = -1;
-    for (int i = 0; i < n; i++) { //Creating loop
+    for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
         printf_s("\nWrite value at position %d: ",i);
         int val;
         if (!scanf_s("%d", &val)) {
@@ -51,19 +51,19 @@ void Task1() {
             i--;
         }
         arr[i] = val;
-        if (val < 0 && neg_1 < 0) neg_1 = i;
-        else if (val < 0 && neg_2 < 0) neg_2 = i;
+        if (val < 0 && neg_1 < 0) neg_1 = i; //check for first negative
+        else if (val < 0 && neg_2 < 0) neg_2 = i; //check for second negative
     }
     int min = arr[0];
     int min_pos = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) { //creating loop to find minimum value
         if (arr[i] < min) {
             min = arr[i];
             min_pos = i;
         }
     }
     printf_s("Minimum value at position: %d\n", min_pos);
-    if (neg_1 >= 0 && neg_2 >= 0) {
+    if (neg_1 >= 0 && neg_2 >= 0) { //check if two negatives found and calculate sum between them
         int sum = 0;
         for (int i = neg_1 + 1; i < neg_2; i++) {
             sum += arr[i];
@@ -77,7 +77,7 @@ void Task1() {
 
 void Task2() {
     int n;
-    int arr[100];
+    int arr[ARR_MAX];
 
     printf_s("Write n\n");
     if (!scanf_s("%d", &n) || n > 100 || n < 0) { //Getting n value and check if 100 > n > 0
@@ -86,7 +86,7 @@ void Task2() {
         Task2();
         return;
     }
-    for (int i = 0; i < n; i++) { //Creating loop
+    for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
         printf_s("\nWrite value at position %d: ", i);
         int val;
         if (!scanf_s("%d", &val)) {
@@ -100,19 +100,19 @@ void Task2() {
     int min_pos = 0;
     int max = arr[0];
     int max_pos = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) { //creating loop that will find minimum value
         if (arr[i] > max) {
             max = arr[i];
             max_pos = i;
         }
     }
-    for (int i = 0; i < max_pos; i++) {
+    for (int i = 0; i < max_pos; i++) { //creating loop that will find maximum value
         if (arr[i] < min) {
             min = arr[i];
             min_pos = i;
         }
     }
-    if (max_pos != 0) {
+    if (max_pos != 0) { //check if two values found and calculate sum between them
         int sum = 0;
         for (int i = min_pos + 1; i < max_pos; i++) {
             sum += arr[i];
@@ -126,9 +126,9 @@ void Task2() {
 
 void Task3() {
     int n = 40;
-    int arr[40] = { 7,6,1,8,7,5,7,8,1,8,7,5,4,5,1,5,4,9,4,0,4,7,6,5,9,4,3,7,6,8,9,1,5,4,3,5,6,7,8,0 };
+    int arr[ARR_MAX] = { 7,6,1,8,7,5,7,8,1,8,7,5,4,5,1,5,4,9,4,0,4,7,6,5,9,4,3,7,6,8,9,1,5,4,3,5,6,7,8,0 };
     int newarr[20];
-    /*for (int i = 0; i < n; i++) {
+    /*for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
         printf_s("\nWrite value at position %d: ", i);
         int val;
         if (!scanf_s("%d", &val) || val > 9 || val < 0) {
@@ -138,12 +138,12 @@ void Task3() {
         }
         arr[i] = val;
     }*/
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 20; i++) { //fill new array with 0 to prevent errors
         newarr[i] = 0;
     }
     printf_s("76187578187545154940 - 47659437689154356780 = ");
     //printf_s("\n");
-    for (int val_pos = 19; val_pos >= 0; val_pos--) {
+    for (int val_pos = 19; val_pos >= 0; val_pos--) { //Creating loop that will calculate new value
         int value1 = arr[val_pos];
         int value2 = arr[20 + val_pos];
         newarr[val_pos] += value1 - value2;
@@ -156,7 +156,7 @@ void Task3() {
             newarr[val_pos - 1] += 1;
         }
     }
-    for (int val_pos = 0; val_pos < 20; val_pos++) {
+    for (int val_pos = 0; val_pos < 20; val_pos++) { //Creating loop that will write new value
         printf_s("%d", newarr[val_pos]);
     }
 }
