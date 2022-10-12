@@ -57,6 +57,7 @@ void Task1() {
         float val;
         if (random == 1) {
             val = 100 - (rand() % 200);
+            printf_s("random at pos %d: %f\n", i, val);
         }
         else {
             printf_s("\nWrite value at position %d: ", i);
@@ -144,7 +145,7 @@ void Task2() {
         }
     }
     if (max_pos != 0) { //check if two values found and remove values between them
-        for (int i = min_pos + 1; i < n - min_pos; i++) {
+        for (int i = min_pos + 1; i <= n - min_pos; i++) {
             arr[i] = arr[i - min_pos - 1 + max_pos];
         }
         printf_s("New array:");
@@ -169,11 +170,13 @@ void Task3() {
         Task1();
         return;
     }
+    if (random == 1) printf_s("First Value:  ");
     for (int i = 0; i < n; i++) { //Creating loop that will fill array with user input
         
         int val;
         if (random == 1) {
             val = rand() % 10;
+            printf_s("%d", val);
         }
         else {
             printf_s("\nWrite value at position %d: ", i);
@@ -184,6 +187,7 @@ void Task3() {
             }
         }
         arr[i] = val;
+        if (i == 19) printf_s("\nSecond Value: ");
     }
     for (int i = 0; i < 20; i++) { //fill new array with 0 to prevent errors
         newarr[i] = 0;
@@ -194,6 +198,7 @@ void Task3() {
         int value2 = arr[20 + val_pos];
         newarr[val_pos] += value1 - value2;
         if (newarr[val_pos] < 0 && val_pos > 0) {
+            newarr[val_pos - 1] -= 1;
             newarr[val_pos] += 10;
         }
         else if (newarr[val_pos] > 9) {
