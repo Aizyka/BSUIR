@@ -34,7 +34,7 @@ void rem_element(int*& arr, int pos, int size) {
 	arr = temp;
 }
 
-void rem_element_sec(int*& arr, int pos, int size) {
+void rem_element_sec(int*& arr,int pos, int size) {
 	int* temp = (int*)malloc((size - 1) * sizeof(int));
 	memmove(temp, arr, (pos) * sizeof(int));
 	memmove(temp + pos, (arr)+(pos + 1), (size - pos) * sizeof(int));
@@ -109,5 +109,14 @@ void user_array(int*& arr, int x) {
 void print_array(int* arr, int x) {
 	for (int i = 0; i < x; i++) {
 		printf_s("\nElement at pos (%d): %d", i, arr[i]);
+	}
+}
+
+void print_array_with_sizes(int** arr, int* size, int rows) {
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < size[i]; j++) {
+			printf_s("%d\t", arr[i][j]);
+		}
+		printf_s("\n");
 	}
 }
