@@ -10,6 +10,10 @@
 void Task1();
 void Task2();
 void Task3();
+void Task1_Run(int** arr, int x, int y);
+void Task2_Run(int** a, int n);
+void Task3_Run(int** arr, int* size_arr, int rowsCount, int number);
+
 
 int main()
 {
@@ -51,29 +55,12 @@ void Task1() {
     else
         user_array_sec(arr, x, y, 1);
 
-    printf_s("\n");
-
-    for (int i = 0; i < x; i++) {
-        for (int j = 0; j < y; j++) {
-            int get = arr[i][j];
-            int sum = 0;
-
-            for (int j1 = 0; j1 < y; j1++) {
-                if (j == j1) continue;
-                sum += arr[i][j1];
-            }
-            if (sum < get) {
-                printf_s("Found number %d at line %d (sum %d)\n", get, i, sum);
-            }
-        }
-        printf_s("\n");
-    }
+    Task1_Run(arr,x,y);
     print_array_sec(arr, x, y);
     free(arr);
 }
 
 void Task2() {
-    bool sim = true;
     printf_s("Choose method (1 - Pre Defined, 0 - Standard): ");
     int method = getint(0, 1);
     int n;
@@ -111,23 +98,8 @@ void Task2() {
             user_array_sec(a, n, n, 1);
     }
 
-    printf_s("\n");
-    
-    for (int i = 0; i < n - 1; i++)
-    {
-        if ((a[0][i] != a[i][n - i - 1]) || (a[i][0] != a[i][n - i - 1]) || (a[n - 1][n - i - 1] != a[i][n - i - 1]) || (a[n - i - 1][n - 1] != a[i][n - i - 1])) sim = false;
-        if (i < n / 2)
-            if ((a[i][i] != a[i][n - i - 1]) || (a[n - i - 1][n - i - 1] != a[i][n - i - 1])) sim = false;
-        if (!sim)
-        {
-            break;
-        }
-    }
-    if (sim)
-        printf_s("TEST OK");
-    else 
-        printf_s("TEST FAILED");
-    print_array_sec(a, n, n);
+    Task2_Run(a, n);
+    //print_array_sec(a, n, n);
     free(a);
 }
 
@@ -138,30 +110,86 @@ void Task3() {
     int rowsCount = getint(0);
     int** arr = allocate_sec(rowsCount);
     int* size_arr = allocate(rowsCount);
+    Task3_Run(arr, size_arr, rowsCount, number);
+    free(arr);
+    free(size_arr);
+}
+
+void Task1_Run(int** arr, int x, int y) {
+    printf_s("\n");
+
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            int get = arr[i][j];
+            int sum = 0;
+
+            for (int j1 = 0; j1 < y; j1++) {
+                if (j == j1) continue;
+                sum += arr[i][j1];
+            }
+            if (sum < get) {
+                printf_s("Found number %d at line %d (sum %d)\n", get, i, sum);
+            }
+        }
+        printf_s("\n");
+    }
+}
+
+void Task2_Run(int** a, int n) {
+    bool sim = true;
+    printf_s("\n");
+    print_array_sec(a, n, n);
+    for (int i = 0; i < n - 1; i++)
+    {
+        if ((a[0][i] != a[i][n - i - 1]) || (a[i][0] != a[i][n - i - 1]) || (a[n - 1][n - i - 1] != a[i][n - i - 1]) || (a[n - i - 1][n - 1] != a[i][n - i - 1])) sim = false;
+        if (i < n / 2)
+            if ((a[i][i] != a[i][n - i - 1]) || (a[n - i - 1][n - i - 1] != a[i][n - i - 1])) sim = false;
+        if (!sim)
+        {
+            break;
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        if (sim)
+            rem_element_sec(a[i], n - i - 1, n);
+        else
+            rem_element_sec(a[i], i, n);
+    }
+    print_array_sec(a, n, n - 1);
+    if (sim)
+        printf_s("TEST OK");
+    else
+        printf_s("TEST FAILED");
+}
+
+void Task3_Run(int** arr, int* size_arr, int rowsCount, int number) {
     for (int i = 0; i < rowsCount; i++) {
         printf_s("Row: %d\n", i);
         int size;
         arr[i] = write_until_number(0, &size);
-
+        size_arr[i] = size;        
+    }
+    printf_s("Input Array:\n");
+    print_array_with_sizes(arr, size_arr, rowsCount);
+    for (int i = 0; i < rowsCount; i++) {
+        int size = size_arr[i];
         int n = 0;
+        int rem = 0;
+        int* to_rem = allocate(size);
         while (n < size) {
             if (arr[i][n] < number && n % 2 == 0) {
-                rem_element_sec(arr[i], n, size);
-                n = 0;
-                size--;
+                to_rem[rem] = n;
+                rem++;
             }
-            else n++;
+            n++;
+        }
+        for (int j = 0; j < rem; j++) {
+            rem_element_sec(arr[i], to_rem[j]-j, size);
+            size--;
         }
         size_arr[i] = size;
     }
-
     printf_s("\n");
-    for (int i = 0; i < rowsCount; i++) {
-        for (int j = 0; j < size_arr[i]; j++) {
-            printf_s("%d\t", arr[i][j]);
-        }
-        printf_s("\n");
-    }
-    free(arr);
-    free(size_arr);
+    printf_s("Output Array:\n");
+    print_array_with_sizes(arr, size_arr, rowsCount);
 }
