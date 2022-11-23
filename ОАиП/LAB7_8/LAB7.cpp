@@ -21,19 +21,8 @@ int main(int argc, char** argv)
             printf_s("Invalid task number!\n");
             rewind(stdin);
         }
-        void (*task_run) (int, char**) = NULL;
-        switch (task) {
-        case 1:
-            task_run = Task1;
-            break;
-        case 2:
-            task_run = Task2;
-            break;
-        case 3:
-            task_run = Task3;
-            break;
-        }
-        task_run(argc, argv);
+        void (*task_run[3]) (int, char**) = {Task1, Task2, Task3};
+        ((*task_run[task-1])(argc, argv));
         printf_s("\n\n");
         rewind(stdin);
     }

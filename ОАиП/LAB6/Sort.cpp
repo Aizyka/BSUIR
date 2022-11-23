@@ -112,13 +112,19 @@ void HoaraSort(int*& arr, int*& sort, int start, int end) {
 void MergeSortAndArrayHoara(int**& arr, int* sort, int w, int h) {
 	int** new_matrix = allocate_sec(w, h);
 	for (int sort_pos = 0; sort_pos < h; sort_pos++) {
-		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < w; j++)
-			{
-				new_matrix[j][sort_pos] = arr[j][sort[sort_pos]];
-			}
+		for (int j = 0; j < w; j++)
+		{
+			new_matrix[j][sort_pos] = arr[j][sort[sort_pos]];
 		}
 	}
 	free(arr);
 	arr = new_matrix;
+}
+
+void Reverse(int*& arr, int w) {
+	for (int i = 0; i < w / 2; i++) {
+		int temp = arr[i];
+		arr[i] = arr[w - i - 1];
+		arr[w - i - 1] = temp;
+	}
 }

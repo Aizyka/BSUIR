@@ -57,16 +57,26 @@ void Task1() {
     if(showArray == 1) print_array(arr, x);
     int* duplicate_arr = duplicate(arr, x);
     clock_t time_start = clock();
-    MergeSort(arr, 0, x - 1);
+    MergeSort(duplicate_arr, 0, x - 1);
     clock_t time_end = clock();
     if(showArray == 1) print_array(arr, x);
     printf_s("\nMerge Sort - Ellapsed seconds: %f seconds", (float)(time_end - time_start) / CLOCKS_PER_SEC);
 
+    duplicate_arr = duplicate(arr, x);
     time_start = clock();
-    BubbleSort(arr, x);
+    Reverse(duplicate_arr, x);
+    MergeSort(duplicate_arr, 0, x - 1);
     time_end = clock();
-    if (showArray == 1) print_array(arr, x);
+    if (showArray == 1) print_array(duplicate_arr, x);
+    printf_s("\nMerge Sort Reversed - Ellapsed seconds: %f seconds", (float)(time_end - time_start) / CLOCKS_PER_SEC);
+
+    duplicate_arr = duplicate(arr, x);
+    time_start = clock();
+    BubbleSort(duplicate_arr, x);
+    time_end = clock();
+    if (showArray == 1) print_array(duplicate_arr, x);
     printf_s("\nBubble Sort - Ellapsed seconds: %f seconds", (float)(time_end - time_start) / CLOCKS_PER_SEC);
+    free(duplicate_arr);
     free(arr);
 }
 

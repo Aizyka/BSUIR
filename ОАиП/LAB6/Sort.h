@@ -5,3 +5,4 @@ void BubbleSort(int*& arr, int size);
 void HoaraSort(int*& arr, int*& sort, int start, int end);
 void SortMatrixByHoaraMethod(int**& arr, int width, int height);
 void MergeSortAndArrayHoara(int**& arr, int* sort, int w, int h);
+void Reverse(int*& arr, int w);
