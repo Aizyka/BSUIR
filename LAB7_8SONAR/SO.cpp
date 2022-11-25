@@ -3,12 +3,13 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-int str_len(char* str) {
+int str_len(const char* str) {
 	int len = 0;
 	while (str[len] != '\0')
 		len++;
 	return len;
 }
+
 void str_copy(char* str1, char*& str2) {
 	int len = str_len(str1);
 	int i = 0;
@@ -20,8 +21,7 @@ void str_copy(char* str1, char*& str2) {
 	str2[i] = '\0';
 }
 char* str_sub(char* str1, int start, int length) {
-	int i = start;
-	char* str2 = (char*)calloc(length+1, sizeof(char));
+	char* str2 = (char*)malloc((length+1)*sizeof(char));
 	for (int i = 0; i < length; i++) {
 		if (str1[i+start] == '\0') break;
 		str2[i] = str1[i + start];
@@ -33,7 +33,7 @@ char* str_sub(char* str1, int start, int length) {
 void str_add(char*& str, char* add, int pos) {
 	int add_len = str_len(add);
 	int len = str_len(str);
-	char* newStr = (char*)calloc((len + add_len+1), sizeof(char));
+	char* newStr = (char*)malloc((len + add_len+1)* sizeof(char));
 	int j = 0;
 	for (int i = 0; i < pos; i++) {
 		newStr[j] = str[i];
@@ -58,7 +58,16 @@ char** str_split(char* str, char letter, int* size) {
 	int i = 0;
 	int prev_pos = 0;
 	int new_arr = 0;
-	char** str2 = (char**)calloc(1, sizeof(char*));
+	int max_poses = 0;
+	while (str[i] != '\0') {
+		if (str[i] == letter) {
+			max_poses++;
+		}
+		i++;
+	}
+	i = 0;
+	char** str2 = (char**)malloc(max_poses*sizeof(char*));
+
 	while (str[i] != '\0') {
 		if (str[i] == letter) {
 			str2[new_arr] = str_sub(str, prev_pos, i - prev_pos);
