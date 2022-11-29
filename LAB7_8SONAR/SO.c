@@ -31,6 +31,7 @@ char* str_sub(char* str1, int start, int length) {
 }
 
 void str_add(char** str, char* add, int pos) {
+    if(pos >= str_len((*str))) return;
     int add_len = str_len(add);
     int len = str_len((*str));
     char *newStr = (char *) malloc((len + add_len + 1) * sizeof(char));
