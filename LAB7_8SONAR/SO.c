@@ -34,7 +34,7 @@ void str_add(char** str, char* add, int pos) {
 
     int add_len = str_len(add);
     int len = str_len((*str));
-    if(pos >= len) return;
+    if (pos >= len) return;
     char *newStr = (char *) malloc((len + add_len + 1) * sizeof(char));
     int j = 0;
     for (int i = 0; i < pos; i++) {
@@ -45,12 +45,12 @@ void str_add(char** str, char* add, int pos) {
         newStr[j] = add[i];
         j++;
     }
-    if(j >= len+add_len) return;
-    for (int i = pos; i < len; i++) {
-        newStr[j] = (*str)[i];
-        j++;
-        if(j >= len+add_len) break;
-    }
+    if (j < len + add_len)
+        for (int i = pos; i < len; i++) {
+            newStr[j] = (*str)[i];
+            j++;
+            if (j >= len + add_len) break;
+        }
 
 
     newStr[len + add_len] = '\0';
