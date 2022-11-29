@@ -31,9 +31,10 @@ char* str_sub(char* str1, int start, int length) {
 }
 
 void str_add(char** str, char* add, int pos) {
-    if(pos >= str_len((*str))) return;
+
     int add_len = str_len(add);
     int len = str_len((*str));
+    if(pos >= len) return;
     char *newStr = (char *) malloc((len + add_len + 1) * sizeof(char));
     int j = 0;
     for (int i = 0; i < pos; i++) {
@@ -44,6 +45,7 @@ void str_add(char** str, char* add, int pos) {
         newStr[j] = add[i];
         j++;
     }
+    if()
     for (int i = pos; i < len; i++) {
         newStr[j] = (*str)[i];
         j++;
@@ -90,17 +92,21 @@ int str_max(char* str, char letter) {
     int max = 0;
     while (str[i] != '\0') {
         if (str[i] == letter) {
-            int strlen = str_len(str_sub(str, prev_pos, i - prev_pos));
+            char* sub = str_sub(str, prev_pos, i - prev_pos);
+            int strlen = str_len(sub);
             if (strlen > max)
                 max = strlen;
             prev_pos = i + 1;
+            free(sub);
         }
         i++;
     }
     if (str[i] == '\0') {
-        int strlen = str_len(str_sub(str, prev_pos, i - prev_pos));
+        char* sub = str_sub(str, prev_pos, i - prev_pos);
+        int strlen = str_len(sub);
         if (strlen > max)
             max = strlen;
+        free(sub);
     }
     return max;
 }

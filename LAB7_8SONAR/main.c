@@ -64,6 +64,7 @@ void Task2(int argc, char** argv) {
         str_add(&S, sub_s0, str_len(S) / 2);
         printf("\nResult: ");
         print_string(S);
+        free(sub_s0);
     }
     else
         printf("k cant be larger than length of S0 string\n");
