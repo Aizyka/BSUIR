@@ -1,3 +1,0 @@
-﻿  LAB7.cpp
-C:\VSProjects\BSUIR\LAB7\LAB7\LAB7.cpp(16,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  LAB7.vcxproj -> C:\VSProjects\BSUIR\LAB7\Debug\LAB7.exe
