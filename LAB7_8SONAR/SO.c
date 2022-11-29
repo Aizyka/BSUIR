@@ -45,9 +45,11 @@ void str_add(char** str, char* add, int pos) {
         newStr[j] = add[i];
         j++;
     }
+    if(j >= len+add_len) return;
     for (int i = pos; i < len; i++) {
         newStr[j] = (*str)[i];
         j++;
+        if(j >= len+add_len) break;
     }
 
 
